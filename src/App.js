@@ -9,8 +9,21 @@ function App() {
     height: "",
   });
   const [baiInputs, setBaiInputs] = useState({ hip: "", height: "" });
+  const [bmiInputs, setBmiInputs] = useState({ weight: "", height: "" });
+  const [ratioInputs, setRatioInputs] = useState({
+    waist: "",
+    height: "",
+    hip: "",
+  });
 
-  const [results, setResults] = useState({ BRI: null, ABSI: null, BAI: null });
+  const [results, setResults] = useState({
+    BRI: null,
+    ABSI: null,
+    BAI: null,
+    BMI: null,
+    waistToHeight: null,
+    waistToHip: null,
+  });
 
   const calculateBRI = () => {
     const { waist, height } = briInputs;
@@ -43,6 +56,25 @@ function App() {
     const heightInMeters = height / 100;
     const BAI = hip / Math.pow(heightInMeters, 1.5) - 18;
     setResults((prev) => ({ ...prev, BAI }));
+  };
+
+  const calculateBMI = () => {
+    const { weight, height } = bmiInputs;
+    const heightInMeters = height / 100;
+    const BMI = weight / Math.pow(heightInMeters, 2);
+    setResults((prev) => ({ ...prev, BMI }));
+  };
+
+  const calculateWaistToHeight = () => {
+    const { waist, height } = ratioInputs;
+    const waistToHeight = waist / height;
+    setResults((prev) => ({ ...prev, waistToHeight }));
+  };
+
+  const calculateWaistToHip = () => {
+    const { waist, hip } = ratioInputs;
+    const waistToHip = waist / hip;
+    setResults((prev) => ({ ...prev, waistToHip }));
   };
 
   return (
@@ -83,6 +115,67 @@ function App() {
           </label>
           <button onClick={calculateBRI}>Hesapla</button>
           {results.BRI !== null && <p>Sonuç: {results.BRI.toFixed(2)}</p>}
+        </div>
+        {/* Waist to Height Ratio Card */}
+        <div className="card">
+          <h3>Bel / Boy Oranı</h3>
+          <label>
+            Bel Çevresi (cm):
+            <input
+              type="number"
+              value={ratioInputs.waist}
+              onChange={(e) =>
+                setRatioInputs({ ...ratioInputs, waist: e.target.value })
+              }
+              placeholder="Bel çevresini giriniz"
+            />
+          </label>
+          <label>
+            Boy (cm):
+            <input
+              type="number"
+              value={ratioInputs.height}
+              onChange={(e) =>
+                setRatioInputs({ ...ratioInputs, height: e.target.value })
+              }
+              placeholder="Boyunuzu giriniz"
+            />
+          </label>
+          <button onClick={calculateWaistToHeight}>Hesapla</button>
+          {results.waistToHeight !== null && (
+            <p>Sonuç: {results.waistToHeight.toFixed(2)}</p>
+          )}
+        </div>
+
+        {/* Waist to Hip Ratio Card */}
+        <div className="card">
+          <h3>Bel / Kalça Oranı</h3>
+          <label>
+            Bel Çevresi (cm):
+            <input
+              type="number"
+              value={ratioInputs.waist}
+              onChange={(e) =>
+                setRatioInputs({ ...ratioInputs, waist: e.target.value })
+              }
+              placeholder="Bel çevresini giriniz"
+            />
+          </label>
+          <label>
+            Kalça Çevresi (cm):
+            <input
+              type="number"
+              value={ratioInputs.hip}
+              onChange={(e) =>
+                setRatioInputs({ ...ratioInputs, hip: e.target.value })
+              }
+              placeholder="Kalça çevresini giriniz"
+            />
+          </label>
+          <button onClick={calculateWaistToHip}>Hesapla</button>
+          {results.waistToHip !== null && (
+            <p>Sonuç: {results.waistToHip.toFixed(2)}</p>
+          )}
         </div>
 
         {/* ABSI Card */}
@@ -152,6 +245,35 @@ function App() {
           </label>
           <button onClick={calculateBAI}>Hesapla</button>
           {results.BAI !== null && <p>Sonuç: {results.BAI.toFixed(2)}</p>}
+        </div>
+
+        {/* BMI Card */}
+        <div className="card">
+          <h3>BMI Hesaplama</h3>
+          <label>
+            Ağırlık (kg):
+            <input
+              type="number"
+              value={bmiInputs.weight}
+              onChange={(e) =>
+                setBmiInputs({ ...bmiInputs, weight: e.target.value })
+              }
+              placeholder="Kilonuzu giriniz"
+            />
+          </label>
+          <label>
+            Boy (cm):
+            <input
+              type="number"
+              value={bmiInputs.height}
+              onChange={(e) =>
+                setBmiInputs({ ...bmiInputs, height: e.target.value })
+              }
+              placeholder="Boyunuzu giriniz"
+            />
+          </label>
+          <button onClick={calculateBMI}>Hesapla</button>
+          {results.BMI !== null && <p>Sonuç: {results.BMI.toFixed(2)}</p>}
         </div>
       </main>
 
