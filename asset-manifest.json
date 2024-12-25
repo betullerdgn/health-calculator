@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/health-calculator/static/css/main.0f063a0d.css",
+    "main.js": "/health-calculator/static/js/main.8d33c130.js",
+    "static/js/488.de328deb.chunk.js": "/health-calculator/static/js/488.de328deb.chunk.js",
+    "index.html": "/health-calculator/index.html",
+    "main.0f063a0d.css.map": "/health-calculator/static/css/main.0f063a0d.css.map",
+    "main.8d33c130.js.map": "/health-calculator/static/js/main.8d33c130.js.map",
+    "488.de328deb.chunk.js.map": "/health-calculator/static/js/488.de328deb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0f063a0d.css",
+    "static/js/main.8d33c130.js"
+  ]
+}
